@@ -1,0 +1,217 @@
+CREATE SCHEMA `resturantdb` ;
+
+
+CREATE TABLE `resturantdb`.`employee` (
+  `SSNumber` VARCHAR(9) NOT NULL,
+  `EmployeeCode` INT NOT NULL,
+  `StreetName` VARCHAR(45) NOT NULL,
+  `City` VARCHAR(45) NOT NULL,
+  `State` VARCHAR(45) NOT NULL,
+  `Zip` VARCHAR(5) NOT NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `HireDate` DATE NOT NULL,
+  `ManagerSSN` VARCHAR(9) NULL,
+  `Status` INT NOT NULL,
+  PRIMARY KEY (`SSNumber`, `EmployeeCode`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+
+ALTER TABLE `resturantdb`.`employee` 
+ADD INDEX `ManagerSSN_idx` (`ManagerSSN` ASC) VISIBLE;
+;
+ALTER TABLE `resturantdb`.`employee` 
+ADD CONSTRAINT `ManagerSSN`
+  FOREIGN KEY (`ManagerSSN`)
+  REFERENCES `resturantdb`.`employee` (`SSNumber`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `resturantdb`.`employee` 
+ADD INDEX `ServerID` (`EmployeeCode` ASC) VISIBLE;
+;
+
+
+
+CREATE TABLE `resturantdb`.`table` (
+  `TableID` INT NOT NULL,
+  `Status` VARCHAR(45) NOT NULL,
+  `Max_People` INT NOT NULL,
+  `Location` VARCHAR(45) NOT NULL,
+  `ServerID` INT NOT NULL,
+  PRIMARY KEY (`TableID`),
+  INDEX `ServerID_idx` (`ServerID` ASC) VISIBLE,
+  CONSTRAINT `ServerID`
+    FOREIGN KEY (`ServerID`)
+    REFERENCES `resturantdb`.`employee` (`EmployeeCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `resturantdb`.`party` (
+  `PartyID` INT NOT NULL,
+  `PartySize` INT NOT NULL,
+  `PartyBill` DECIMAL(5,2) NOT NULL,
+  `TableID` INT NULL,
+  PRIMARY KEY (`PartyID`),
+  INDEX `TableID_idx` (`TableID` ASC) VISIBLE,
+  CONSTRAINT `TableID`
+    FOREIGN KEY (`TableID`)
+    REFERENCES `resturantdb`.`table` (`TableID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `resturantdb`.`customer` (
+  `PartyID` INT NOT NULL,
+  `Age` INT NOT NULL,
+  `DietRestrictions` VARCHAR(45) NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `CustomerPartyID` INT NOT NULL,
+  INDEX `PartyID_idx` (`CustomerPartyID` ASC) VISIBLE,
+  CONSTRAINT `CustomerPartyID`
+    FOREIGN KEY (`CustomerPartyID`)
+    REFERENCES `resturantdb`.`party` (`PartyID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `resturantdb`.`merchandise` (
+  `Merch_ID` INT NOT NULL,
+  `Description` VARCHAR(500) NOT NULL,
+  `Type` VARCHAR(45) NOT NULL,
+  `Stock` INT NOT NULL,
+  `Price` DECIMAL(4,2) NOT NULL,
+  `PartyMerchOrder` INT NOT NULL,
+  PRIMARY KEY (`Merch_ID`),
+  INDEX `PartyID_idx` (`PartyMerchOrder` ASC) VISIBLE,
+  CONSTRAINT `PartyID`
+    FOREIGN KEY (`PartyMerchOrder`)
+    REFERENCES `resturantdb`.`party` (`PartyID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE `resturantdb`.`season` (
+  `SeasonID` INT NOT NULL,
+  `SeasonName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`SeasonID`));
+
+
+CREATE TABLE `resturantdb`.`menu` (
+  `EffectiveDate` DATE NOT NULL,
+  `Season` INT NOT NULL,
+  `Type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`EffectiveDate`, `Type`),
+  INDEX `SeasonID_idx` (`Season` ASC) VISIBLE,
+  CONSTRAINT `SeasonID`
+    FOREIGN KEY (`Season`)
+    REFERENCES `resturantdb`.`season` (`SeasonID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE `resturantdb`.`food_storage` (
+  `FoodType` VARCHAR(500) NOT NULL,
+  `Location` VARCHAR(45) NOT NULL,
+  `Quantity` INT NOT NULL,
+  PRIMARY KEY (`FoodType`));
+
+
+ALTER TABLE `resturantdb`.`menu` 
+ADD INDEX `FoodType_idx` (`Type` ASC) VISIBLE;
+;
+ALTER TABLE `resturantdb`.`menu` 
+ADD CONSTRAINT `FoodType`
+  FOREIGN KEY (`Type`)
+  REFERENCES `resturantdb`.`food_storage` (`FoodType`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+CREATE TABLE `resturantdb`.`vendor` (
+  `PhoneNumber` VARCHAR(12) NOT NULL,
+  `SalesRepName` VARCHAR(45) NOT NULL,
+  `Rates` DECIMAL(5,2) NOT NULL,
+  `VendorName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`PhoneNumber`, `VendorName`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+ALTER TABLE `resturantdb`.`vendor` 
+ADD INDEX `VendorName` (`VendorName` ASC) VISIBLE;
+;
+
+
+
+CREATE TABLE `resturantdb`.`equipment` (
+  `EquipmentID` INT NOT NULL,
+  `Type` VARCHAR(45) NOT NULL,
+  `Status` VARCHAR(45) NOT NULL,
+  `Manufactuer` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`EquipmentID`),
+  INDEX `Vendor_Name_idx` (`Manufactuer` ASC) VISIBLE,
+  CONSTRAINT `VendorName`
+    FOREIGN KEY (`Manufactuer`)
+    REFERENCES `resturantdb`.`vendor` (`VendorName`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+
+CREATE TABLE `resturantdb`.`food_item` (
+  `ItemID` INT NOT NULL,
+  `Price` DECIMAL(4,2) NOT NULL,
+  `Ingredients` VARCHAR(500) NOT NULL,
+  `Description` VARCHAR(500) NOT NULL,
+  `Size` VARCHAR(45) NOT NULL,
+  `Tool` INT NULL,
+  `DeliveryParty` INT NULL,
+  PRIMARY KEY (`ItemID`),
+  INDEX `Description_idx` (`Description` ASC) VISIBLE,
+  INDEX `EquipmentID_idx` (`Tool` ASC) VISIBLE,
+  INDEX `DeliveryParty_idx` (`DeliveryParty` ASC) VISIBLE,
+  CONSTRAINT `Description`
+    FOREIGN KEY (`Description`)
+    REFERENCES `resturantdb`.`food_storage` (`FoodType`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `EquipmentID`
+    FOREIGN KEY (`Tool`)
+    REFERENCES `resturantdb`.`equipment` (`EquipmentID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `DeliveryParty`
+    FOREIGN KEY (`DeliveryParty`)
+    REFERENCES `resturantdb`.`party` (`PartyID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
