@@ -1,0 +1,18 @@
+-- SEASONS
+insert into season values(1, "Spring");
+insert into season values(2, "Summer");
+insert into season values(3, "Fall");
+insert into season values(4, "Winter");
+
+-- Employee Managers
+insert into employee values("652079999",6520, "1699 Stark Hollow Road", "Nunn", "CO", "80648","Todd", "Ashman", '2022-06-12', null, 1);
+
+
+-- Employee Regular
+insert into employee values("097409999",0974, "152 West Virginia Avenue", "Nunn", "CO", "80648","Michael ", "Hill", '2022-06-15', "652079999", 1);
+insert into employee values("266979999","2669", "2122 American Drive", "Nunn", "CO", "80648","Allison", "Elmer", '2022-06-16', "652079999", 1);
+insert into employee values("568669999","5686", "968 Driftwood Road", "Nunn", "CO", "80648","Valerie", "Colvin", '2022-06-15', "652079999", 1);
+insert into employee values("108189999",1081, "4223 Pallet Street West Nyack", "Nunn", "CO", "80648","Timothy", "Townsend", '2022-06-15', "652079999", 1);
+
+
+
