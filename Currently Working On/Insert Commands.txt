@@ -1,3 +1,6 @@
+use resturantdb;
+
+
 
 -- SEASONS
 insert into season values(1, "Spring");
@@ -35,19 +38,18 @@ insert into tables values(34, "In Use", 10, "Outside", 1081);
 insert into tables values(35, "In Use", 10, "Outside", 1081);
 
 -- Partys
-insert into party values(101, 5, 0.00, 1);
+insert into party values(101, 5, 0.00, 1); -- 15+15
 insert into party values(102, 2, 0.00, 2);
-insert into party values(104, 2, 0.00, 4);
-insert into party values(103, 2, 0.00, 21);
+insert into party values(104, 2, 0.00, 4); -- 45 + 
+insert into party values(103, 2, 0.00, 21); -- 20 + 
 insert into party values(105, 4, 0.00, 5);
 insert into party values(106, 2, 0.00, 6);
 insert into party values(107, 2, 0.00, 6);
 insert into party values(108, 2, 0.00, 22);
-insert into party values(109, 8, 0.00, 24);
+insert into party values(109, 8, 0.00, 24); -- 90 + 
 insert into party values(110, 3, 0.00, 25);
-insert into party values(111, 10, 0.00, 34);
-insert into party values(112, 5, 0.00, 35);
-
+insert into party values(111, 10, 0.00, 34); -- 30 + 45
+insert into party values(112, 5, 0.00, 35); -- 15 + 
 
 -- Customer
 insert into customer values (33, "No","Lisa", "Cordell", 101);
@@ -97,3 +99,102 @@ insert into customer values (54, "No","Dennis", "Langley", 112);
 insert into customer values (33, "No","Larry", "Woods", 112);
 insert into customer values (50, "No","Carolyn", "Carter", 112);
 insert into customer values (63, "No","Sharon", "White", 112);
+
+-- Merchandise
+insert into merchandise values(1, "Red and White Shirt with Company Logo in the Center", "Short Sleeve T-Shirt", 1, 15.00, 101);
+insert into merchandise values(2, "Navy Blue Shirt with Company Logo and Slogan on it", "Short Sleeve T-Shirt", 1, 15.00, 101);
+insert into merchandise values(3, "Dark Grey Hoodie with Company Logo and Unique Local Design", "Hoodie", 1, 45.00, 104);
+insert into merchandise values(4, "Black and White Trucker Hat with Company Logo and adjustable fit", "Hat", 1, 20.0, 103);
+insert into merchandise values(5, "Dark Grey Hoodie with Company Logo and Unique Local Design", "Hoodie", 2, 90.00, 109);
+insert into merchandise values(6, "Navy Blue Shirt with Company Logo and Slogan on it", "Short Sleeve T-Shirt", 2, 15.00, 111);
+insert into merchandise values(7, "Dark Grey Hoodie with Company Logo and Unique Local Design", "Hoodie", 1, 45.00, 111);
+insert into merchandise values(8, "Red and White Shirt with Company Logo in the Center", "Short Sleeve T-Shirt", 1, 15.00, 112);
+
+
+
+
+-- Vendor
+insert into vendor values("970-942-6624", "Donald Heger", 14026.00, "Alto-Shaam"); -- Oven
+insert into vendor values("786-203-0053", "Brent Foos", 1449.00, "Backyard Pro"); -- Outdoor Grill
+insert into vendor values("815-745-1021", "Cynthia Gardner", 1299.99, "WPPO"); -- Pizza Oven
+insert into vendor values("253-335-6309", "Dianne Kirkman", 1975.95, "Advance Tabco"); -- Hot Well
+insert into vendor values("815-745-1021", "Michael Penn", 729.00, "Solwave"); -- Microwave
+insert into vendor values("850-663-6082", "Glen Hall", 441.07, "Avantco"); -- Panini Press
+
+-- Equipment
+insert into equipment values(5367, "Two Layer Oven", "Working", "Alto-Shaam");
+insert into equipment values(6541, "Outdoor Gas Grill", "Working", "Backyard Pro");
+insert into equipment values(8844, "Large Indoor Pizza Oven", "Working", "WPPO");
+insert into equipment values(3014, "Three Section Hot Well", "Working", "Advance Tabco");
+insert into equipment values(4532, "Medium Microwave", "Working", "Solwave");
+insert into equipment values(6333, "Medium Panini Press", "Working", "Avantco");
+
+-- Food Storage
+insert into food_storage values("House Tomato Soup", "Hotwell / Cold Room", 100);
+insert into food_storage values("House Potato Soup", "Hotwell / Cold Room", 100);
+insert into food_storage values("German Potato Salad", "Hotwell / Cold Room", 500);
+insert into food_storage values("Wood Fired Pizza", "Made to Order", 300);
+insert into food_storage values("Applewood Smoked Hamburger", "Cold Room", 300);
+insert into food_storage values("Applewood Smoked Cheese Hamburger", "Cold Room", 300);
+insert into food_storage values("Impossible Burger", "Cold Room", 100);
+insert into food_storage values("Taco Platter", "Made to Order", 300);
+insert into food_storage values("Woodfired Grilled Chciken", "Cold Room", 300);
+insert into food_storage values("Beer Battered Fried Chicken", "Cold Room", 300);
+insert into food_storage values("House Salad", "Cold Room", 600);
+insert into food_storage values("Ceasar Salad", "Cold Room", 600);
+insert into food_storage values("Salmon", "Cold Room", 150);
+insert into food_storage values("Prime Rib", "Cold Room", 300);
+insert into food_storage values("NY Strip", "Cold Room", 300);
+insert into food_storage values("Green Beans", "Cold Well", 500);
+insert into food_storage values("Mashed Potatos", "Hotwell/Cold Room", 600);
+insert into food_storage values("French Fries", "Cold Room", 800);
+insert into food_storage values("Grilled Cheese", "Made to Order", 300);
+
+
+-- Menu
+-- Spring Items
+insert into menu values('2022-03-20', 1,"House Tomato Soup");
+insert into menu values('2022-03-20', 1,"House Potato Soup");
+insert into menu values('2022-03-20', 1,"Applewood Smoked Hamburger");
+insert into menu values('2022-03-20', 1,"Applewood Smoked Cheese Hamburger");
+insert into menu values('2022-03-20', 1,"Impossible Burger");
+insert into menu values('2022-03-20', 1,"Taco Platter");
+insert into menu values('2022-03-20', 1,"Beer Battered Fried Chicken");
+insert into menu values('2022-03-20', 1,"House Salad");
+insert into menu values('2022-03-20', 1,"Ceasar Salad");
+insert into menu values('2022-03-20', 1,"NY Strip");
+insert into menu values('2022-03-20', 1,"Green Beans");
+insert into menu values('2022-03-20', 1,"Mashed Potatos");
+insert into menu values('2022-03-20', 1,"French Fries");
+insert into menu values('2022-03-20', 1,"Grilled Cheese");
+
+-- Summer Items
+insert into menu values('2022-06-21', 2,"House Tomato Soup");
+insert into menu values('2022-06-21', 2,"House Potato Soup");
+insert into menu values('2022-06-21', 2,"Applewood Smoked Hamburger");
+insert into menu values('2022-06-21', 2,"Applewood Smoked Cheese Hamburger");
+insert into menu values('2022-06-21', 2,"Impossible Burger");
+insert into menu values('2022-06-21', 2,"Taco Platter");
+insert into menu values('2022-06-21', 2,"Beer Battered Fried Chicken");
+insert into menu values('2022-06-21', 2,"Woodfired Grilled Chciken");
+insert into menu values('2022-06-21', 2,"House Salad");
+insert into menu values('2022-06-21', 2,"Ceasar Salad");
+insert into menu values('2022-06-21', 2,"NY Strip");
+insert into menu values('2022-06-21', 2,"Prime Rib");
+insert into menu values('2022-06-21', 2,"Salmon");
+insert into menu values('2022-06-21', 2,"Green Beans");
+insert into menu values('2022-06-21', 2,"Mashed Potatos");
+insert into menu values('2022-06-21', 2,"German Potato Salad");
+insert into menu values('2022-06-21', 2,"French Fries");
+insert into menu values('2022-06-21', 2,"Grilled Cheese");
+insert into menu values('2022-06-21', 2,"Wood Fired Pizza");
+
+
+
+
+
+
+
+
+
+

@@ -210,9 +210,18 @@ RENAME TO  `resturantdb`.`tables` ;
 ALTER TABLE `resturantdb`.`customer` 
 DROP COLUMN `PartyID`;
 
+ALTER TABLE `resturantdb`.`vendor` 
+CHANGE COLUMN `Rates` `Rates` DECIMAL(7,2) NOT NULL ;
 
 
-
+ALTER TABLE `resturantdb`.`menu` 
+DROP FOREIGN KEY `FoodType`;
+ALTER TABLE `resturantdb`.`menu` 
+CHANGE COLUMN `Type` `Type` VARCHAR(500) NOT NULL ;
+ALTER TABLE `resturantdb`.`menu` 
+ADD CONSTRAINT `FoodType`
+  FOREIGN KEY (`Type`)
+  REFERENCES `resturantdb`.`food_storage` (`FoodType`);
 
 
 
