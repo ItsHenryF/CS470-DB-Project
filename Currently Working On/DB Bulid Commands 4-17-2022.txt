@@ -225,5 +225,7 @@ ADD CONSTRAINT `FoodType`
 
 
 
+ALTER TABLE `resturantdb`.`food_item` 
+CHANGE COLUMN `ItemID` `OrderID` INT NOT NULL ;
 
 
