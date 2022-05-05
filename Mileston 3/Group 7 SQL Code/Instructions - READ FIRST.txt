@@ -1,0 +1,21 @@
+This should be pretty simple, only two files.
+
+1.) First open MySQL workbench
+2.) Open text document "DB Build Commands"
+3.) Copy and paste ALL contents from that file into MySQL and his the run entire code button. 
+-- Our database layout is called resturantdb so by the small chance there is another group with the same name, that table must be dropped.
+4.) "DB Build Commands" should have compiled in MySQL and refreshing in the side bar you should now see the schema and all of its tables.
+5.) Clear MySQL workbench query screen and open txt file "Insert Commands".
+6.) Copy and paste ALL contents from Insert commands into the querey window inside MySQL.
+-- It should automatically switch to using resturantdb at the start of this file with the "use resturantdb;" command at the start.
+7.) Hit the run all lighthing bult button so it runs all of the commands in one batch.
+8.) All of the data should now be inserted into the database and it should now be useable.
+
+Extra: 
+
+To test all of the commands have worked that the DB is built succesfully and all the data has been entered correctly you can run this command that should tell you the total amount of money made so far in the day.
+
+use resturantdb;
+select sum(partyBill) as "Profit" from party;
+
+And you should get the output of one column called Profit and one row with the value of 701.50.
